@@ -4,6 +4,7 @@
 void setup() {
   Serial.begin(115200);
   pinMode(2, OUTPUT);
+  Serial.println("Hello world");
 }
 
 void loop() {
