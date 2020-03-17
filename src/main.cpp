@@ -1,19 +1,18 @@
-#include <Arduino.h>
+
+#include "webpage.h"
+
+// Load Wi-Fi library
 #include <WiFi.h>
+
+
 
 void setup() {
   Serial.begin(115200);
-  pinMode(2, OUTPUT);
-  Serial.println("Hello world");
+  webpage_init();
+  
 }
 
-void loop() {
-  Serial.println("Hello world");
+void loop(){
+  webpage_update();
   
-  digitalWrite(2, HIGH);
-  delay(500);
-
-  digitalWrite(2, LOW);
-  delay(500);
-
 }
