@@ -3,12 +3,31 @@
   Complete project details at http://randomnerdtutorials.com  
 *********/
 
+
+
 #include <WiFi.h>
 #include "webpage.h"
 
+//#define R1 6800.0
+#define R1 6000.0
+#define u_in 3.3
+//#define c -0.00000001794237955
+#define c_val -0.00000001794237955
+#define b 0.0002509871139
+#define a 0.001049960637
+#define read_res 11
+
+
+double read_temp_main(int pin);
+double calc_resistance(int pin);
+
 // Replace with your network credentials
-const char* ssid     = "Noa 2.5 GHz";
-const char* password = "rumpnisse";
+//const char* ssid     = "Noa 2.5 GHz";
+//const char* password = "rumpnisse";
+const char* ssid     = "4G-Gateway-5002";
+const char* password = "Emanuelsson123";
+//const char* ssid     = "Noa";
+//const char* password = "hejhejhej";
 
 // Set web server port number to 80
 WiFiServer server(80);
@@ -73,15 +92,14 @@ void webpage_update(){
             client.println("<body><h1>Lollos temperatur</h1>");
             
             // Display current temps
-            client.println("<p>Temp 1 </p>");
-            /*
+            disp_temps(client);
+
             // If the output26State is off, it displays the ON button       
-            if (output26State=="off") {
+            /*if (true) {
               client.println("<p><a href=\"/26/on\"><button class=\"button\">ON</button></a></p>");
             } else {
               client.println("<p><a href=\"/26/off\"><button class=\"button button2\">OFF</button></a></p>");
             } */
-               
            
             client.println("</body></html>");
             
@@ -104,4 +122,35 @@ void webpage_update(){
     Serial.println("Client disconnected.");
     Serial.println("");
   }
+}
+
+void disp_temps(WiFiClient client){
+  //int pins[6] = {36, 39, 34, 35, 32, 33};
+  int pins[4] = {34, 35, 32, 33};
+
+  for (int i = 0; i < sizeof(pins)/sizeof(pins[0]); i++){
+    double temp = read_temp(pins[i]);
+    //Serial.println(read_temp(34));
+    //client.println("<p>Temp " + String(i+1) + ": " + String(temp) + "</p>");
+    client.println("<p>Temp " + String(pins[i]) + ": " + String(temp) + "</p>");
+  }
+
+  for (int i = 32; i < 36; i++){
+    double temp = read_temp(i);
+    Serial.printf("temp on pin %d : %0.4f \n", i, (double)temp);
+  }
+  Serial.println("");
+
+            
+}
+
+double read_temp(int pin){
+  double R = calc_resistance(pin);
+  return 1/(a + b*log(R) + c_val*pow(log(R), 3)) - 273.15; // -273.15 to convert from Kelvin to Celsius
+}
+
+double calc_resistance(int pin){
+  double u = analogRead(pin) * 3.3 / (pow(2, read_res) - 1);
+  printf("Voltage is: %f \n", u);
+  return R1*u_in/u - R1;
 }
