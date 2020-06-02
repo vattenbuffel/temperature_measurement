@@ -57,12 +57,9 @@ void setup() {
 }
 
 void loop(){
-  update_all_thermometers(thermometers, n);
-    /*printf("Cur_temp on %s is  = %f\n", thermometers[0].name, thermometers[0].T);
-    printf("Cur_temp on %s is  = %f\n\n", thermometers[1].name, thermometers[1].T);
-    delay(250);*/
-  
+  update_all_thermometers(thermometers, n);  
   webpage_update(thermometers);
+  delay(100);
 }
 
 

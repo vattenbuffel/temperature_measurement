@@ -48,7 +48,7 @@ void webpage_init(){
 }
 
 void webpage_update(thermometer* thermometers){
-    WiFiClient client = server.available();   // Listen for incoming clients
+  WiFiClient client = server.available();   // Listen for incoming clients
 
   if (client) {                             // If a new client connects,
     Serial.println("New Client.");          // print a message out in the serial port
@@ -87,12 +87,9 @@ void webpage_update(thermometer* thermometers){
             // Display current temps
             disp_temps(client, thermometers);
 
-            // If the output26State is off, it displays the ON button       
-            /*if (true) {
-              client.println("<p><a href=\"/26/on\"><button class=\"button\">ON</button></a></p>");
-            } else {
-              client.println("<p><a href=\"/26/off\"><button class=\"button button2\">OFF</button></a></p>");
-            } */
+            // Display update button     
+            client.println("<p><a href=\"/26/on\"><button class=\"button\">Uppdatera</button></a></p>");
+ 
            
             client.println("</body></html>");
             
@@ -122,7 +119,8 @@ void disp_temps(WiFiClient client, thermometer* thermometers){
   int n = 2;
 
   for (int i = 0; i < n; i++){
-    client.println("<p>Temp on " + String(thermometers[i].name) + ": " + String((int)round(thermometers[i].T)) + "</p>");
+    //client.println("<p>Temp on " + String(thermometers[i].name) + ": " + String((int)round(thermometers[i].T)) + "</p>");
+    client.println("<p>Temp on " + String(thermometers[i].name) + ": " + String(thermometers[i].T) + "</p>");
   }
             
 }

@@ -4,7 +4,6 @@
 
 /*
 TODO:
-Implement so that it can get an array of thermometers and read all of the values
 */
 
 void update_all_thermometers(thermometer* thermometers, int n){
