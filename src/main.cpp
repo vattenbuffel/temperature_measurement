@@ -16,7 +16,7 @@
 
 
 struct thermometer temperature = {
-  .pin = 32,
+  .pin = 35,
   .read_res = 11,
   .P = 0,
   .motion_noise = 0.00000000000000001,
@@ -35,6 +35,7 @@ struct thermometer temperature = {
 const int n = 2; 
 struct thermometer thermometers[n] = {temperature, temperature}; 
 char names[n][50] = {{"Test name 1"},{"Test name 2"}};
+int pins[n] = {32, 35};
 
 int counter = 0;
 void setup() {
@@ -48,8 +49,11 @@ void setup() {
       printf("Name too long, naming thermometer to unnamed\n");
       strcpy(thermometers[i].name, "unnamed");
     }
-    
   }
+
+  // Configure the pins
+  for (int i = 0; i < n; i++)
+    thermometers[i].pin = pins[i];
 
   webpage_init();
   analogReadResolution(11);

@@ -15,10 +15,11 @@
 
 
 // Replace with your network credentials
-const char* ssid     = "Noa 2.5 GHz";
-const char* password = "rumpnisse";
-//const char* ssid     = "4G-Gateway-5002";
-//const char* password = "Emanuelsson123";
+//const char* ssid     = "Noa 2.5 GHz";
+//const char* password = "rumpnisse";
+const char* ssid     = "4G-Gateway-5002";
+const char* password = "Emanuelsson123";
+//const char* password = "Vera98";
 //const char* ssid     = "Noa";
 //const char* password = "hejhejhej";
 
