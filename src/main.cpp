@@ -32,10 +32,10 @@ struct thermometer temperature = {
   .x = 1.1
 };
 
-const int n = 2; 
-struct thermometer thermometers[n] = {temperature, temperature}; 
-char names[n][50] = {{"Test name 1"},{"Test name 2"}};
-int pins[n] = {32, 35};
+const int n = 4; 
+struct thermometer thermometers[n] = {temperature, temperature, temperature,temperature}; 
+char names[n][50] = {{"fran tank"},{"panna ut"},{"till tank"}, {"matarvatten"}};// 32, 35, 34, 33
+int pins[n] = {32, 35, 34, 33};
 
 int counter = 0;
 void setup() {
@@ -63,7 +63,6 @@ void setup() {
 void loop(){
   update_all_thermometers(thermometers, n);  
   webpage_update(thermometers);
-  delay(100);
 }
 
 

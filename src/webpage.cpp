@@ -17,9 +17,10 @@
 // Replace with your network credentials
 //const char* ssid     = "Noa 2.5 GHz";
 //const char* password = "rumpnisse";
-const char* ssid     = "4G-Gateway-5002";
-const char* password = "Emanuelsson123";
-//const char* password = "Vera98";
+//const char* ssid     = "4G-Gateway-5002";
+//const char* password = "Emanuelsson123";
+const char* ssid     = "Lilla huset";
+const char* password = "Vera1998";
 //const char* ssid     = "Noa";
 //const char* password = "hejhejhej";
 
@@ -55,6 +56,7 @@ void webpage_update(thermometer* thermometers){
     Serial.println("New Client.");          // print a message out in the serial port
     String currentLine = "";                // make a String to hold incoming data from the client
     while (client.connected()) {            // loop while the client's connected
+     update_all_thermometers(thermometers, 4);  
       if (client.available()) {             // if there's bytes to read from the client,
         char c = client.read();             // read a byte, then
         Serial.write(c);                    // print it out the serial monitor
@@ -117,12 +119,13 @@ void webpage_update(thermometer* thermometers){
 
 void disp_temps(WiFiClient client, thermometer* thermometers){
   //int pins[6] = {36, 39, 34, 35, 32, 33};
-  int n = 2;
+  int n = 4;
 
   for (int i = 0; i < n; i++){
     //client.println("<p>Temp on " + String(thermometers[i].name) + ": " + String((int)round(thermometers[i].T)) + "</p>");
     client.println("<p>Temp on " + String(thermometers[i].name) + ": " + String(thermometers[i].T) + "</p>");
   }
+
             
 }
 

@@ -26,6 +26,8 @@ void update_step(thermometer* Thermometer){
   double R = Thermometer->meas_noise;
   double x = Thermometer->x;
   double y = analogRead(Thermometer->pin) * Thermometer->u_in / (pow(2, Thermometer->read_res) - 1);
+  
+  
 
   double S = c*P*c + R;
   double K = P*c/S;
