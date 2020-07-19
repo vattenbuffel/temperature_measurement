@@ -1,18 +1,14 @@
 /* Comments:
     Code to measure temperature using a termistor. It seems to be accurate to about 2 degrees
-
 */
 
 
-/*  TODO:
-      The other todos.
-*/
 
-#include "webpage.h"
 
-// Load Wi-Fi library
-#include <WiFi.h>
 #include "thermometer.h"
+#include "Arduino.h"
+#include "node_red.h"
+#include <WiFi.h>
 
 
 struct thermometer temperature = {
@@ -40,7 +36,8 @@ int pins[n] = {32, 35, 34, 33};
 int counter = 0;
 void setup() {
   Serial.begin(115200);
-  
+  delay(500);
+
   // Add the names to the thermomemters
   for (int i = 0; i < n; i++) {
     if (strlen(names[i]) < name_max_len)
@@ -50,19 +47,48 @@ void setup() {
       strcpy(thermometers[i].name, "unnamed");
     }
   }
+  
+  printf("gonna go to node_red_start\n");
+  node_red_start();
+  for(;;){
+    thermometers[0].x = 1;
+    calc_temp(&thermometers[0]);
+    printf("Voltage %f corresponds to temperature %f\n", thermometers[0].x, thermometers[0].T);
+    
+    thermometers[0].x = 3.3;
+    calc_temp(&thermometers[0]);
+    printf("Voltage %f corresponds to temperature %f\n", thermometers[0].x, thermometers[0].T);
+    
+    thermometers[0].x = 1.5;
+    calc_temp(&thermometers[0]);
+    printf("Voltage %f corresponds to temperature %f\n", thermometers[0].x, thermometers[0].T);
+    
+    thermometers[0].x = 2;
+    calc_temp(&thermometers[0]);
+    printf("Voltage %f corresponds to temperature %f\n", thermometers[0].x, thermometers[0].T);
+    
+    thermometers[0].x = 3;
+    calc_temp(&thermometers[0]);
+    printf("Voltage %f corresponds to temperature %f\n", thermometers[0].x, thermometers[0].T);
+    
+    printf("\n");
+    delay(10000);
+  }
+
+
+
+
 
   // Configure the pins
   for (int i = 0; i < n; i++)
     thermometers[i].pin = pins[i];
 
-  webpage_init();
   analogReadResolution(11);
 
 }
 
 void loop(){
   update_all_thermometers(thermometers, n);  
-  webpage_update(thermometers);
 }
 
 

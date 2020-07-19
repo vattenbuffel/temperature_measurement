@@ -1,6 +1,8 @@
 #include "thermometer.h"
 #include <math.h>
-#include <WiFi.h> //To get analogread
+#include "Arduino.h"
+
+//#include <WiFi.h> //To get analogread
 
 /*
 TODO:
