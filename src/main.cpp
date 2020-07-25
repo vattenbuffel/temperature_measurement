@@ -13,7 +13,7 @@
 
 struct thermometer temperature = {
   .pin = 35,
-  .read_res = 11,
+  .read_res = 12,
   .P = 0,
   .motion_noise = 0.00000000000000001,
   .meas_noise = 10,
@@ -34,9 +34,32 @@ char names[n][50] = {{"fran tank"},{"panna ut"},{"till tank"}, {"matarvatten"}};
 int pins[n] = {32, 35, 34, 33};
 
 int counter = 0;
+
+/*double ReadVoltage(byte pin){
+  double reading = analogRead(pin); // Reference voltage is 3v3 so maximum reading is 3v3 = 4095 in range 0 to 4095
+  if(reading < 1 || reading > 4095) return 0;
+  // return -0.000000000009824 * pow(reading,3) + 0.000000016557283 * pow(reading,2) + 0.000854596860691 * reading + 0.065440348345433;
+  return (-0.000000000000016 * pow(reading,4) + 0.000000000118171 * pow(reading,3)- 0.000000301211691 * pow(reading,2)+ 0.001109019271794 * reading + 0.034143524634089)*1.03;
+} // Added an improved polynomial, use either, comment out as required
+*/
+
 void setup() {
   Serial.begin(115200);
   delay(500);
+
+
+  /*for(;;){
+    analogReadResolution(12);
+    //pinMode(34, INPUT_PULLDOWN);
+    printf("read voltage command: %f\n",ReadVoltage(34));
+    
+    delay(100);
+  }*/
+
+
+
+
+
 
   // Add the names to the thermomemters
   for (int i = 0; i < n; i++) {
@@ -50,7 +73,7 @@ void setup() {
   
   printf("gonna go to node_red_start\n");
   node_red_start();
-  for(;;){
+  /*for(;;){
     thermometers[0].x = 1;
     calc_temp(&thermometers[0]);
     printf("Voltage %f corresponds to temperature %f\n", thermometers[0].x, thermometers[0].T);
@@ -73,7 +96,7 @@ void setup() {
     
     printf("\n");
     delay(10000);
-  }
+  }*/
 
 
 
@@ -83,12 +106,20 @@ void setup() {
   for (int i = 0; i < n; i++)
     thermometers[i].pin = pins[i];
 
-  analogReadResolution(11);
+  analogReadResolution(12);
 
 }
 
 void loop(){
   update_all_thermometers(thermometers, n);  
+
+  for(int i = 0; i < n; i++){
+    printf("temp on pin: %d is: %f\n", thermometers[i].pin, thermometers[i].T);
+  }
+  
+  printf("\n");
+  delay(100);
+
 }
 
 

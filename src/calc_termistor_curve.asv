@@ -48,13 +48,17 @@ R1 = solve(u_max == u_in*R1/(R1+R100));
 u_min = solve(u_min == R1*u_in/(R1+R0));
 
 R = @(u) R1*3.3./u(:)-R1;
-%R = @(u) R1*3.3./(u_in-u(:));
 T_est_u = @(u)  kel_to_cel(1./(a_val + b_val.*log(R(u)) + c_val*log(R(u)).^3));
-
 
 u = u_max:-0.01:u_min;
 plot(u, T_est_u(u))
 legend('R(u)')
+
+% Plot the estimated R at a given temp compared to the true, ie taken from
+% the data sheet
+figure
+Tem
+plot(T)
 
 %%
 function t = cel_to_kel(t)
