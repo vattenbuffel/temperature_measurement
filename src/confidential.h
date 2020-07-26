@@ -5,8 +5,8 @@
 #define WIFI_PASSWORD "rumpnisse"
 #define WIFI_SSID "Noa"
 #define WIFI_PASSWORD "hejhejhej"*/
-#define WIFI_SSID "Noa"
-#define WIFI_PASSWORD "hejhejhej"
-#define MQTT_BROKER "192.168.1.11"
+#define WIFI_SSID "4G-Gateway-5002"
+#define WIFI_PASSWORD "Emanuelsson123"
+#define MQTT_BROKER "192.168.8.11"
 
 #endif //CONFIDENTIAL_H_

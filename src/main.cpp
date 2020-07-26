@@ -47,20 +47,6 @@ void setup() {
   Serial.begin(115200);
   delay(500);
 
-
-  /*for(;;){
-    analogReadResolution(12);
-    //pinMode(34, INPUT_PULLDOWN);
-    printf("read voltage command: %f\n",ReadVoltage(34));
-    
-    delay(100);
-  }*/
-
-
-
-
-
-
   // Add the names to the thermomemters
   for (int i = 0; i < n; i++) {
     if (strlen(names[i]) < name_max_len)
@@ -71,36 +57,7 @@ void setup() {
     }
   }
   
-  printf("gonna go to node_red_start\n");
   node_red_start();
-  /*for(;;){
-    thermometers[0].x = 1;
-    calc_temp(&thermometers[0]);
-    printf("Voltage %f corresponds to temperature %f\n", thermometers[0].x, thermometers[0].T);
-    
-    thermometers[0].x = 3.3;
-    calc_temp(&thermometers[0]);
-    printf("Voltage %f corresponds to temperature %f\n", thermometers[0].x, thermometers[0].T);
-    
-    thermometers[0].x = 1.5;
-    calc_temp(&thermometers[0]);
-    printf("Voltage %f corresponds to temperature %f\n", thermometers[0].x, thermometers[0].T);
-    
-    thermometers[0].x = 2;
-    calc_temp(&thermometers[0]);
-    printf("Voltage %f corresponds to temperature %f\n", thermometers[0].x, thermometers[0].T);
-    
-    thermometers[0].x = 3;
-    calc_temp(&thermometers[0]);
-    printf("Voltage %f corresponds to temperature %f\n", thermometers[0].x, thermometers[0].T);
-    
-    printf("\n");
-    delay(10000);
-  }*/
-
-
-
-
 
   // Configure the pins
   for (int i = 0; i < n; i++)
@@ -112,13 +69,14 @@ void setup() {
 
 void loop(){
   update_all_thermometers(thermometers, n);  
-
-  for(int i = 0; i < n; i++){
-    printf("temp on pin: %d is: %f\n", thermometers[i].pin, thermometers[i].T);
-  }
+  node_red_publish_temperatures(thermometers, n);
+  printf("32: %f\n", analogRead(32)*3.3/4095);
+  printf("33: %f\n", analogRead(33)*3.3/4095);
+  printf("34: %f\n", analogRead(34)*3.3/4095);
+  printf("35: %f\n", analogRead(35)*3.3/4095);
   
-  printf("\n");
-  delay(100);
+
+  delay(1000);
 
 }
 
