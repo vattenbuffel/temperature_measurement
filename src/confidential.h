@@ -9,6 +9,6 @@
 #define WIFI_PASSWORD "Emanuelsson123"*/
 #define WIFI_SSID "Lilla huset"
 #define WIFI_PASSWORD "Vera1998"
-#define MQTT_BROKER "192.168.8.11"
+#define MQTT_BROKER "192.168.1.107"
 
 #endif //CONFIDENTIAL_H_
