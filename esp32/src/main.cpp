@@ -2,7 +2,7 @@
 #include "Arduino.h"
 // #include "node_red.h"
 // #include <WiFi.h>
-#include "termistor.h"
+#include "thermocouple.h"
 
 
 // struct thermometer temperature = {
@@ -69,7 +69,7 @@ void loop(){
   // printf("34: %f\n", analogRead(34)*3.3/4095);
   // printf("35: %f\n", analogRead(35)*3.3/4095);
 
-  termistor_main();
+  printf("Thermocouple measurement: %f C\n", thermocouple_measure());
   // printf("toeihaneiotnh\n");
   
 
