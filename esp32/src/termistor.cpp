@@ -3,11 +3,11 @@
 
 #include "max6675.h"
 
-int thermoDO = 4;
-int thermoCS = 5;
-int thermoCLK = 6;
+int thermoDO = 19;
+int thermoCS = 23;
+int thermoCLK = 5;
 
-static MAX6675 thermocouple(thermoCLK, thermoCS, thermoDO);
+MAX6675 thermocouple(thermoCLK, thermoCS, thermoDO);
 
 void termistor_main(){
    printf("C = %f\n", thermocouple.readCelsius()); 

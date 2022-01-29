@@ -70,6 +70,7 @@ void loop(){
   // printf("35: %f\n", analogRead(35)*3.3/4095);
 
   termistor_main();
+  // printf("toeihaneiotnh\n");
   
 
   delay(1000);
