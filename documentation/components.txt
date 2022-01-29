@@ -1,0 +1,7 @@
+Termoelement:
+	ARCELI MAX6675 Modul + K typ termoelement: https://www.amazon.se/dp/B07MY36P9Y?ref_=pe_24982401_513610551_E_301_dt_1
+	Sample: http://www.esp32learning.com/code/esp32-and-max6675-example.php
+
+Multiplexer:
+	Jcevium 10 st. 16CH analog multiplexer modul 74HC4067 CD74HC4067: https://www.amazon.se/dp/B09GFXPHJ6?ref_=pe_24982401_513610551_E_301_dt_1
+	
